@@ -31,15 +31,17 @@ class Db {
 
     public function newAdmin($username, $password)
     {
-        $sql = $this->conn->prepare("select * from admin where username=?");
-        $sql->bind_param("s", $username);
-        $sql->execute();
-        if ($sql->get_result()->num_rows > 0) {
+        $admin_check = $this->conn->prepare("select * from admin where username=?");
+        $admin_check->bind_param("s", $username);
+        $admin_check->execute();
+        if ($admin_check->get_result()->num_rows > 0) {
             die("Username exists");
         }
-        $sql = $this->conn->prepare("insert into admin values (?, ?)");
-        $sql->bind_param("ss", $username, $password);
-        $sql->execute();
+        $admin_check->close();
+        $new_admin = $this->conn->prepare("insert into admin (username, password) values (?, ?)");
+        $new_admin->bind_param("ss", $username, $password);
+        $new_admin->execute();
+        $new_admin->close();
     }
 
     public function isAdmin($username, $password)

@@ -1,7 +1,8 @@
 <?php
-    include($_SERVER["DOCUMENT_ROOT"] . "/../db.php");
+    if (!isset($path)) {
+        header("Location: /");
+    }
 
-    $db = new Db();
     $gig_id = $_GET["gig_id"] ?? "";
     $gig = $db->getGig($gig_id);
     if (empty($gig)) {
