@@ -4,16 +4,16 @@
     }
 
     $group = $_GET["group"] ?? "";
-    $gigs = $db->query("
-        SELECT * FROM gigs WHERE 
-        gig_group LIKE '%$group%' 
-        ORDER BY gig_date DESC
-    ");
+    $date = $_GET["date"] ?? "";
+    $location = $_GET["location"] ?? "";
+    $gigs = $db->getAllGigs($group, $date, $location);
 ?>
 <div class="body">
     <section class="search-bar">
         <form method="get" class="search-form">
             <input placeholder="<?php echo $group ? $group : "Search By Group" ?>" name="group" />
+            <input placeholder="<?php echo $date ? $date : "Search By Date" ?>" name="date" />
+            <input placeholder="<?php echo $location ? $location : "Search By Location" ?>" name="location" />
             <button type="submit">Search</button>
         </form>
     </section>
@@ -29,6 +29,9 @@
                 <div class="gigs-table-item">Date</div>
                 <div class="gigs-table-item">Group</div>
                 <div class="gigs-table-item">Location</div>
+                <?php if ($is_admin) : ?>
+                    <div class="gigs-table-item"></div>
+                <?php endif; ?>
             </div>
             <?php foreach ($gigs as $gig) : ?>
                 <div class="gigs-table-row" onclick="toggleRow(<?php echo $gig["id"] ?>);">
@@ -41,6 +44,13 @@
                     <div class="gigs-table-item">
                         <?php echo $gig["gig_location"]; ?>
                     </div>
+                    <?php if ($is_admin) : ?>
+                        <div class="gigs-table-item">
+                            <a class="edit-link" href="/edit?gig_id=<?php echo $gig["id"]; ?>">
+                                Edit
+                            </a>
+                        </div>
+                    <?php endif; ?>
                 </div>
                 <div class="gigs-table-row extras" id="gig<?php echo $gig["id"] ?>">
 

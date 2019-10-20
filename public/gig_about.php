@@ -1,19 +1,17 @@
 <?php
-    if (!isset($path)) {
-        header("Location: /");
-    }
-
+    include($_SERVER["DOCUMENT_ROOT"] . "/../db.php");
     $gig_id = $_GET["gig_id"] ?? "";
+    $db = new Db();
     $gig = $db->getGig($gig_id);
     if (empty($gig)) {
         die("Where my gig");
     }
     $gig_videos = $db->query("SELECT * FROM gig_videos WHERE gig_id={$gig["id"]}");
     if ($gig["gig_description"]) : ?>
-    <div class="gigs-table-item">
-        <h4>About</h4>
-        <p><?php echo $gig["gig_description"]; ?></p>
-    </div>
+        <div class="gigs-table-item">
+            <h4>About</h4>
+            <p><?php echo $gig["gig_description"]; ?></p>
+        </div>
     <?php endif;
     if ($gig_videos->num_rows > 0) : ?>
         <div class="gigs-table-item">

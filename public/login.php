@@ -10,7 +10,7 @@
 
         if ($db->isAdmin($username, $password)) {
             $_SESSION["logged_in"] = true;
-            header("Location: /admin");
+            header("Location: /");
         } else {
             $error = "Nah, not good enough";
         }

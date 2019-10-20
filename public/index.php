@@ -3,6 +3,7 @@
     include($_SERVER["DOCUMENT_ROOT"] . "/../db.php");
 
     $db = new Db();
+    $is_admin = isset($_SESSION["logged_in"]) && $_SESSION["logged_in"] === true;
 
 ?>
 <!DOCTYPE html>
@@ -24,14 +25,20 @@
                     Brakke's Gigs
                 </a>
             </h1>
+            <?php if ($is_admin) : ?>
+                <div class="admin-links">
+                    <h3>
+                        <a class="admin-link" href="/logout">
+                            Logout
+                        </a>
+                    </h3>
+                </div>
+            <?php endif; ?>
         </header>
         <?php
             $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
             switch ($path) {
-                case "/admin":
-                    include("./admin.php");
-                    break;
                 case "/login":
                     include("./login.php");
                     break;
@@ -40,6 +47,9 @@
                     break;
                 case "/new-admin":
                     include("./new_admin.php");
+                    break;
+                case "/edit":
+                    include("./edit.php");
                     break;
                 default:
                     include("./home.php");

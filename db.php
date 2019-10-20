@@ -22,6 +22,22 @@ class Db {
         return $this->conn->query($query);
     }
 
+    public function getAllGigs($group, $date, $location) {
+        $sql = $this->conn->prepare("
+            SELECT * FROM gigs WHERE
+            gig_group LIKE ? AND
+            gig_date LIKE ? AND
+            gig_location LIKE ?
+            ORDER BY gig_date DESC
+        ");
+        $group_like = "%$group%";
+        $date_like = "%$date%";
+        $location_like = "%$location%";
+        $sql->bind_param("sss", $group_like, $date_like, $location_like);
+        $sql->execute();
+        return $sql->get_result();
+    }
+
     public function getGig($gig_id) {
         $sql = $this->conn->prepare("select * from gigs where id=?");
         $sql->bind_param("i", $gig_id);

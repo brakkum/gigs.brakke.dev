@@ -125,6 +125,15 @@ h4 {
 
 /* Admin */
 
+.admin-links {
+
+}
+
+.admin-link, .admin-link:visited {
+    text-decoration: none;
+    color: gainsboro;
+}
+
 form {
     width: 95%;
     max-width: 900px;
@@ -140,4 +149,19 @@ form * {
 
 form button {
     max-width: 40%;
+}
+
+.edit-link {
+    color: #262626;
+    text-decoration: none;
+    padding: 5px 10px;
+    margin: 5px;
+}
+
+.edit-link:hover {
+    background-color: aquamarine;
+}
+
+.edit-link:visited {
+    color: #262626;
 }
