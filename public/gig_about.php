@@ -1,5 +1,5 @@
 <?php
-    include("./db.php");
+    include($_SERVER["DOCUMENT_ROOT"] . "/../db.php");
 
     $db = new Db();
     $gig_id = $_GET["gig_id"] ?? "";

@@ -1,6 +1,6 @@
 <?php
-    include($_SERVER["DOCUMENT_ROOT"] . "/autoload.php");
-    include($_SERVER["DOCUMENT_ROOT"] . "/db.php");
+    include($_SERVER["DOCUMENT_ROOT"] . "/../autoload.php");
+    include($_SERVER["DOCUMENT_ROOT"] . "/../db.php");
 
     $db = new Db();
     $group = $_GET["group"] ?? "";
