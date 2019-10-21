@@ -34,7 +34,7 @@
                 <?php endif; ?>
             </div>
             <?php foreach ($gigs as $gig) : ?>
-                <div class="gigs-table-row" onclick="toggleRow(<?php echo $gig["id"] ?>);">
+                <div class="gigs-table-row" onclick="<?php echo !$is_admin ? "toggleRow({$gig["id"]});" : "null" ; ?>">
                     <div class="gigs-table-item">
                         <?php echo $gig["gig_date"]; ?>
                     </div>
@@ -46,6 +46,9 @@
                     </div>
                     <?php if ($is_admin) : ?>
                         <div class="gigs-table-item">
+                            <span class="edit-link" onclick="toggleRow(<?php echo $gig["id"]; ?>);">
+                                Open
+                            </span>
                             <a class="edit-link" href="/edit?gig_id=<?php echo $gig["id"]; ?>">
                                 Edit
                             </a>

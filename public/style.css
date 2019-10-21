@@ -154,6 +154,7 @@ form button {
 .edit-link {
     color: #262626;
     text-decoration: none;
+    text-align: center;
     padding: 5px 10px;
     margin: 5px;
 }
