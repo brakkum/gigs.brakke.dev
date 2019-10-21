@@ -125,8 +125,8 @@ h4 {
 
 /* Admin */
 
-.admin-links {
-
+.gigs-table .admin-button {
+    margin: 5px;
 }
 
 .admin-link, .admin-link:visited {
@@ -147,16 +147,24 @@ form * {
     margin: 10px auto;
 }
 
-form button {
-    max-width: 40%;
-}
-
-.edit-link {
-    color: #262626;
+.admin-button {
+    color: #45425f;
     text-decoration: none;
     text-align: center;
     padding: 5px 10px;
-    margin: 5px;
+    margin: 5px auto;
+    border-radius: 5px;
+    border: 1px solid #45425f;
+    transition: .5s;
+}
+
+.admin-button:hover {
+    color: white;
+    background-color: #45425f;
+}
+
+.admin-button:active {
+    background-color: #5a778b;
 }
 
 .edit-link:hover {
@@ -165,4 +173,23 @@ form button {
 
 .edit-link:visited {
     color: #262626;
+}
+
+.gig-form {
+    display: flex;
+    justify-content: center;
+}
+
+.gig-form label {
+    width: 90%;
+    max-width: 700px;
+}
+
+.gig-form .input {
+    width: 100%;
+}
+
+.input {
+    width: 100%;
+    font-size: 1em;
 }

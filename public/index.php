@@ -49,6 +49,7 @@
                     include("./new_admin.php");
                     break;
                 case "/edit":
+                case "/new":
                     include("./edit.php");
                     break;
                 default:

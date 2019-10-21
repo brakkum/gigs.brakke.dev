@@ -23,6 +23,13 @@
             <div class="gig-stat">
                 <?php echo $num_results ?> gigs
             </div>
+            <?php if ($is_admin) : ?>
+                <div class="gig-stat">
+                    <a href="/new" class="admin-button">
+                        New gig
+                    </a>
+                </div>
+            <?php endif; ?>
         </div>
         <div class="gigs-table">
             <div class="gigs-table-row head">
@@ -46,10 +53,10 @@
                     </div>
                     <?php if ($is_admin) : ?>
                         <div class="gigs-table-item">
-                            <span class="edit-link" onclick="toggleRow(<?php echo $gig["id"]; ?>);">
+                            <span class="admin-button" onclick="toggleRow(<?php echo $gig["id"]; ?>);">
                                 Open
                             </span>
-                            <a class="edit-link" href="/edit?gig_id=<?php echo $gig["id"]; ?>">
+                            <a class="admin-button" href="/edit?gig_id=<?php echo $gig["id"]; ?>">
                                 Edit
                             </a>
                         </div>
