@@ -4,7 +4,6 @@
     }
 
     $query = $_GET;
-    var_dump($query);
     $group = $query["group"] ?? "";
     $date = $query["date"] ?? "";
     $location = $query["location"] ?? "";
@@ -14,14 +13,28 @@
 
     function get_table_header($column) {
         $query = $_GET;
+        $order = $query["order"] ?? "DESC";
         if ($column === "date") {
-            $order = $query["order"] ?? "DESC";
             $order_display = $query["ob"] === "gig_date" ? $order : "";
             $new_order = $order === "ASC" ? "DESC" : "ASC";
             $query["order"] = $new_order;
             $query["ob"] = "gig_date";
             $new_query = http_build_query($query);
-            return "<a href='?$new_query'>Date</a>$order";
+            return "<a href='?$new_query'>Date</a>$order_display";
+        } elseif ($column === "group") {
+            $order_display = $query["ob"] === "gig_group" ? $order : "";
+            $new_order = $order === "ASC" ? "DESC" : "ASC";
+            $query["order"] = $new_order;
+            $query["ob"] = "gig_group";
+            $new_query = http_build_query($query);
+            return "<a href='?$new_query'>Group</a>$order_display";
+        } elseif ($column === "location") {
+            $order_display = $query["ob"] === "gig_location" ? $order : "";
+            $new_order = $order === "ASC" ? "DESC" : "ASC";
+            $query["order"] = $new_order;
+            $query["ob"] = "gig_location";
+            $new_query = http_build_query($query);
+            return "<a href='?$new_query'>Group</a>$order_display";
         }
     }
 
@@ -52,8 +65,8 @@
         <div class="gigs-table">
             <div class="gigs-table-row head">
                 <div class="gigs-table-item"><?php echo get_table_header("date"); ?></div>
-                <div class="gigs-table-item">Group</div>
-                <div class="gigs-table-item">Location</div>
+                <div class="gigs-table-item"><?php echo get_table_header("group"); ?></div>
+                <div class="gigs-table-item"><?php echo get_table_header("location"); ?></div>
                 <?php if ($is_admin) : ?>
                     <div class="gigs-table-item"></div>
                 <?php endif; ?>
