@@ -3,10 +3,28 @@
         header("Location: /");
     }
 
-    $group = $_GET["group"] ?? "";
-    $date = $_GET["date"] ?? "";
-    $location = $_GET["location"] ?? "";
-    $gigs = $db->getAllGigs($group, $date, $location);
+    $query = $_GET;
+    var_dump($query);
+    $group = $query["group"] ?? "";
+    $date = $query["date"] ?? "";
+    $location = $query["location"] ?? "";
+    $order_by = $query["ob"] ?? "gig_date";
+    $order = $query["order"] ?? "DESC";
+    $gigs = $db->getAllGigs($group, $date, $location, $order_by, $order);
+
+    function get_table_header($column) {
+        $query = $_GET;
+        if ($column === "date") {
+            $order = $query["order"] ?? "DESC";
+            $order_display = $query["ob"] === "gig_date" ? $order : "";
+            $new_order = $order === "ASC" ? "DESC" : "ASC";
+            $query["order"] = $new_order;
+            $query["ob"] = "gig_date";
+            $new_query = http_build_query($query);
+            return "<a href='?$new_query'>Date</a>$order";
+        }
+    }
+
 ?>
 <div class="body">
     <section class="search-bar">
@@ -33,7 +51,7 @@
         </div>
         <div class="gigs-table">
             <div class="gigs-table-row head">
-                <div class="gigs-table-item">Date</div>
+                <div class="gigs-table-item"><?php echo get_table_header("date"); ?></div>
                 <div class="gigs-table-item">Group</div>
                 <div class="gigs-table-item">Location</div>
                 <?php if ($is_admin) : ?>

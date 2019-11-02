@@ -22,14 +22,20 @@ class Db {
         return $this->conn->query($query);
     }
 
-    public function getAllGigs($group, $date, $location) {
+    public function getAllGigs($group, $date, $location, $order_by, $order) {
+        $allowed_order_by = ["gig_date", "gig_location", "gig_group"];
+        $allowed_order = ["ASC", "DESC", ""];
+        if (!in_array($order_by, $allowed_order_by) || !in_array($order, $allowed_order)) {
+            die("hey now");
+        }
+        $order = $order === "DESC" ? "DESC" : "ASC";
         $sql = $this->conn->prepare("
             SELECT * FROM gigs WHERE
             gig_group LIKE ? AND
             gig_date LIKE ? AND
             gig_location LIKE ?
-            ORDER BY gig_date DESC
-        ");
+            ORDER BY $order_by $order"
+        );
         $group_like = "%$group%";
         $date_like = "%$date%";
         $location_like = "%$location%";
