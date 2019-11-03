@@ -14,28 +14,21 @@
     function get_table_header($column) {
         $query = $_GET;
         $order = $query["order"] ?? "DESC";
-        if ($column === "date") {
+        $new_order = $order === "ASC" ? "DESC" : "ASC";
+        $query["order"] = $new_order;
+        $order_display = "";
+        if ($column === "Date") {
             $order_display = $query["ob"] === "gig_date" ? $order : "";
-            $new_order = $order === "ASC" ? "DESC" : "ASC";
-            $query["order"] = $new_order;
             $query["ob"] = "gig_date";
-            $new_query = http_build_query($query);
-            return "<a href='?$new_query'>Date</a>$order_display";
-        } elseif ($column === "group") {
+        } elseif ($column === "Group") {
             $order_display = $query["ob"] === "gig_group" ? $order : "";
-            $new_order = $order === "ASC" ? "DESC" : "ASC";
-            $query["order"] = $new_order;
             $query["ob"] = "gig_group";
-            $new_query = http_build_query($query);
-            return "<a href='?$new_query'>Group</a>$order_display";
-        } elseif ($column === "location") {
+        } elseif ($column === "Location") {
             $order_display = $query["ob"] === "gig_location" ? $order : "";
-            $new_order = $order === "ASC" ? "DESC" : "ASC";
-            $query["order"] = $new_order;
             $query["ob"] = "gig_location";
-            $new_query = http_build_query($query);
-            return "<a href='?$new_query'>Location</a>$order_display";
         }
+        $new_query = http_build_query($query);
+        return "<a href='?$new_query'>Location</a>$order_display";
     }
 
 ?>
@@ -64,9 +57,9 @@
         </div>
         <div class="gigs-table">
             <div class="gigs-table-row head">
-                <div class="gigs-table-item"><?php echo get_table_header("date"); ?></div>
-                <div class="gigs-table-item"><?php echo get_table_header("group"); ?></div>
-                <div class="gigs-table-item"><?php echo get_table_header("location"); ?></div>
+                <div class="gigs-table-item"><?php echo get_table_header("Date"); ?></div>
+                <div class="gigs-table-item"><?php echo get_table_header("Group"); ?></div>
+                <div class="gigs-table-item"><?php echo get_table_header("Location"); ?></div>
                 <?php if ($is_admin) : ?>
                     <div class="gigs-table-item"></div>
                 <?php endif; ?>
