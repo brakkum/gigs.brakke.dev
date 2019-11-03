@@ -14,8 +14,6 @@
     function get_table_header($column) {
         $query = $_GET;
         $order = $query["order"] ?? "DESC";
-        $new_order = $order === "ASC" ? "DESC" : "ASC";
-        $query["order"] = $new_order;
         $order_display = "";
         if ($column === "Date") {
             $order_display = $query["ob"] === "gig_date" ? $order : "";
@@ -27,6 +25,9 @@
             $order_display = $query["ob"] === "gig_location" ? $order : "";
             $query["ob"] = "gig_location";
         }
+        $ob_is_same = $_GET["ob"] === $query["ob"];
+        $new_order = ($ob_is_same && $order === "ASC") ? "DESC" : "ASC";
+        $query["order"] = $new_order;
         $new_query = http_build_query($query);
         return "<a href='?$new_query'>Location</a>$order_display";
     }
