@@ -34,7 +34,7 @@
             $query["order"] = $new_order;
             $query["ob"] = "gig_location";
             $new_query = http_build_query($query);
-            return "<a href='?$new_query'>Group</a>$order_display";
+            return "<a href='?$new_query'>Location</a>$order_display";
         }
     }
 
