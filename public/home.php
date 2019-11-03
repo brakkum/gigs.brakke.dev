@@ -29,7 +29,7 @@
         $new_order = ($ob_is_same && $order === "ASC") ? "DESC" : "ASC";
         $query["order"] = $new_order;
         $new_query = http_build_query($query);
-        return "<a href='?$new_query'>Location</a>$order_display";
+        return "<a href='?$new_query'>$column</a>$order_display";
     }
 
 ?>
