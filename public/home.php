@@ -33,16 +33,16 @@
         $query["order"] = $new_order;
         $new_query = http_build_query($query);
         $active_class = $order_display !== "" ? "selected" : "";
-        return "<a href='?$new_query' class='column-header $active_class'>$column</a>$order_display";
+        return "<a href='?$new_query' class='column-header $active_class'>$column</a><span>$order_display</span>";
     }
 
 ?>
 <div class="body">
     <section class="search-bar">
         <form method="get" class="search-form">
-            <input placeholder="<?php echo $group ? $group : "Search By Group" ?>" name="group" />
-            <input placeholder="<?php echo $date ? $date : "Search By Date" ?>" name="date" />
-            <input placeholder="<?php echo $location ? $location : "Search By Location" ?>" name="location" />
+            <input placeholder="Search By Group" value="<?php echo $group; ?>" name="group" />
+            <input placeholder="Search By Date" value="<?php echo $date; ?>" name="date" />
+            <input placeholder="Search By Location" value="<?php echo $location; ?>" name="location" />
             <button type="submit">Search</button>
         </form>
     </section>
