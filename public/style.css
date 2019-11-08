@@ -79,6 +79,15 @@ h4 {
     padding: 10px;
 }
 
+.column-header {
+    text-decoration: none;
+    color: #9c122a;
+}
+
+.column-header.selected {
+    color: cadetblue;
+}
+
 .gigs-table-row:hover:not(.head):not(.extras) {
     cursor: pointer;
     background-color: aliceblue;

@@ -16,7 +16,7 @@
         $order = $query["order"] ?? "DESC";
         $order_display = "";
         if ($column === "Date") {
-            $order_display = $query["ob"] === "gig_date" ? $order : "";
+            $order_display = ($query["ob"] === "gig_date" || !$query["ob"]) ? $order : "";
             $query["ob"] = "gig_date";
         } elseif ($column === "Group") {
             $order_display = $query["ob"] === "gig_group" ? $order : "";
@@ -25,11 +25,15 @@
             $order_display = $query["ob"] === "gig_location" ? $order : "";
             $query["ob"] = "gig_location";
         }
+        if ($order_display !== "") {
+            $order_display = $order_display == "ASC" ? "&uarr;" : "&darr;";
+        }
         $ob_is_same = $_GET["ob"] === $query["ob"];
         $new_order = ($ob_is_same && $order === "ASC") ? "DESC" : "ASC";
         $query["order"] = $new_order;
         $new_query = http_build_query($query);
-        return "<a href='?$new_query'>$column</a>$order_display";
+        $active_class = $order_display !== "" ? "selected" : "";
+        return "<a href='?$new_query' class='column-header $active_class'>$column</a>$order_display";
     }
 
 ?>
