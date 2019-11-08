@@ -3,6 +3,10 @@
         header("Location: /");
     }
 
+    if (isset($_SESSION["logged_in"]) && $_SESSION["logged_in"] === true) {
+        header("Location: /");
+    }
+
     $error = "";
     if (isset($_POST["username"]) && isset($_POST["password"])) {
         $username = $_POST["username"];
