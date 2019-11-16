@@ -5,6 +5,18 @@ html {
     height: 100vh;
 }
 
+h1 {
+    font-size: 2.5em;
+}
+
+h2 {
+    font-size: 2.2em;
+}
+
+h3 {
+    font-size: 2em;
+}
+
 h4 {
     font-size: 1.8em;
 }
@@ -24,7 +36,7 @@ h4 {
 .site-heading a {
     text-decoration: none;
     color: aliceblue;
-    font-size: 2.5em;
+    font-size: 1.2em;
     margin: 20px;
 }
 
@@ -164,7 +176,16 @@ form * {
     margin: 5px auto;
     border-radius: 5px;
     border: 1px solid #45425f;
-    transition: .5s;
+    transition: color .5s;
+}
+
+.admin-button.large {
+    font-size: 25px;
+    margin: 10px;
+}
+
+.admin-button.submit.input {
+    max-width: 200px;
 }
 
 .admin-button:hover {
@@ -201,4 +222,9 @@ form * {
 .input {
     width: 100%;
     font-size: 1em;
+}
+
+.gig-page-message {
+    margin: 20px;
+    text-align: center;
 }

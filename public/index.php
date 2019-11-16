@@ -52,6 +52,9 @@
                 case "/new":
                     include("./edit.php");
                     break;
+                case "/delete":
+                    include("./delete.php");
+                    break;
                 default:
                     include("./home.php");
                     break;

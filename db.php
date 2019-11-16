@@ -51,6 +51,43 @@ class Db {
         return $sql->get_result()->fetch_assoc();
     }
 
+    public function newGig($date, $group, $location, $description)
+    {
+        $sql = $this->conn->prepare("insert into gigs (gig_date, gig_group, gig_location, gig_description) values (?, ?, ?, ?)");
+        $sql->bind_param("ssss", $date, $group, $location, $description);
+        if ($sql->execute()) {
+            return $sql->insert_id;
+        } else {
+            var_dump($sql->error_list);
+            die();
+        }
+    }
+
+    public function updateGig($gig_id, $date, $group, $location, $description)
+    {
+        $sql = $this->conn->prepare("update gigs set gig_date = ?, gig_group = ?, gig_location = ?, gig_description = ? where id = ?");
+        $sql->bind_param("sssss", $date, $group, $location, $description, $gig_id);
+        $sql->execute();
+        if ($sql->execute()) {
+            return $sql->insert_id;
+        } else {
+            var_dump($sql->error_list);
+            die();
+        }
+    }
+
+    public function deleteGig($gig_id)
+    {
+        $sql = $this->conn->prepare("delete from gigs where id = ?");
+        $sql->bind_param("s",  $gig_id);
+        if ($sql->execute()) {
+            return $sql->insert_id;
+        } else {
+            var_dump($sql->error_list);
+            die();
+        }
+    }
+
     public function newAdmin($username, $password)
     {
         $admin_check = $this->conn->prepare("select * from admin where username=?");

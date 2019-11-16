@@ -14,21 +14,22 @@
     function get_table_header($column) {
         $query = $_GET;
         $order = $query["order"] ?? "DESC";
+        $order_by = $query["ob"] ?? "gig_date";
         $order_display = "";
         if ($column === "Date") {
-            $order_display = ($query["ob"] === "gig_date" || !$query["ob"]) ? $order : "";
+            $order_display = (!$order_by || $order_by === "gig_date") ? $order : "";
             $query["ob"] = "gig_date";
         } elseif ($column === "Group") {
-            $order_display = $query["ob"] === "gig_group" ? $order : "";
+            $order_display = $order_by === "gig_group" ? $order : "";
             $query["ob"] = "gig_group";
         } elseif ($column === "Location") {
-            $order_display = $query["ob"] === "gig_location" ? $order : "";
+            $order_display = $order_by === "gig_location" ? $order : "";
             $query["ob"] = "gig_location";
         }
         if ($order_display !== "") {
             $order_display = $order_display == "ASC" ? "&uarr;" : "&darr;";
         }
-        $ob_is_same = $_GET["ob"] === $query["ob"];
+        $ob_is_same = $query["ob"] === $order_by;
         $new_order = ($ob_is_same && $order === "ASC") ? "DESC" : "ASC";
         $query["order"] = $new_order;
         $new_query = http_build_query($query);
@@ -87,6 +88,12 @@
                             </span>
                             <a class="admin-button" href="/edit?gig_id=<?php echo $gig["id"]; ?>">
                                 Edit
+                            </a>
+                            <a class="admin-button" href="/edit?gig_id=<?php echo $gig["id"]; ?>&duplicate">
+                                Duplicate
+                            </a>
+                            <a class="admin-button" href="/delete?gig_id=<?php echo $gig["id"]; ?>">
+                                Delete
                             </a>
                         </div>
                     <?php endif; ?>
